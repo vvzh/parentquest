@@ -69,7 +69,7 @@ var engine = engine || {};
 		return m.fragment(
 			m("div.card-body", [
 				m("h5.card-title", "Меню"),
-				m("form", [
+				m("div.form", [
 					m("div.form-group", m("button.btn.btn-sm.btn-secondary", { onclick: function() { document.location.reload(); } }, "Начать заново")),
 				]),
 			]),
