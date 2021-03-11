@@ -4,6 +4,7 @@ var game = game || {};
 
 (function () {
 
+	game.id = "parentquest";
 	game.name = "Название квеста";
 	game.firstLocationId = 'l1';
 

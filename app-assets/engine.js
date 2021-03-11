@@ -4,11 +4,24 @@ var engine = engine || {};
 
 (function () {
 
-	engine.start = function(game) {
-		engine.menuMode = false;
+	engine.open = function(game) {
 		engine.game = game;
 		document.title = game.name;
-		engine.goToLocation(game.firstLocationId);
+		if (!engine.hasOwnProperty('storage')) {
+			engine.storage = mx.storage();
+		}
+		engine.state = engine.storage.get(engine.game.id);
+		if (engine.state && engine.state.hasOwnProperty('currentLocationId')) {
+			engine.goToLocation(engine.state.currentLocationId, false);
+		} else {
+			engine.restart();
+		}
+	}
+
+	engine.restart = function() {
+		engine.menuMode = false;
+		engine.state = {};
+		engine.goToLocation(engine.game.firstLocationId, false);
 	}
 
 	// Way constructor
@@ -30,11 +43,14 @@ var engine = engine || {};
 		return location;
 	}
 
-	engine.goToLocation = function(locationId) {
-		// TODO: add calling event callbacks here once they are needed
-		engine.currentLocationId = locationId;
+	engine.goToLocation = function(locationId, execEvents = true) {
+		if (execEvents) {
+			// TODO: add calling event callbacks here once they are needed
+		}
+		engine.state.currentLocationId = locationId;
+		engine.storage.set(engine.game.id, engine.state);
 		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
-		engine.currentLocation = engine.Location(engine.game.locations[engine.currentLocationId]);
+		engine.currentLocation = engine.Location(engine.game.locations[engine.state.currentLocationId]);
 		if (engine.currentLocation.hasOwnProperty('image')) {
 			engine.currentImageHtml = '<img src="' + engine.currentLocation.image + '">';
 		} else {
@@ -70,7 +86,7 @@ var engine = engine || {};
 			m("div.card-body", [
 				m("h5.card-title", "Меню"),
 				m("div.form", [
-					m("div.form-group", m("button.btn.btn-sm.btn-secondary", { onclick: function() { document.location.reload(); } }, "Начать заново")),
+					m("div.form-group", m("button.btn.btn-sm.btn-secondary", { onclick: function() { engine.restart(); } }, "Начать заново")),
 				]),
 			]),
 			m("div.card-footer", [
@@ -85,7 +101,7 @@ var engine = engine || {};
 				m("div.card.shadow-sm", [
 					m("div.card-header", [
 						engine.game.name,
-						m("div.float-right", m("a.text-secondary", { href: '#', title: "Меню", onclick: function() { engine.menuMode = true } }, m.trust(engine.gearIcon)))
+						m("div.float-right", m("a.text-secondary", { href: 'javascript:void(0)', title: "Меню", onclick: function() { engine.menuMode = !engine.menuMode } }, m.trust(engine.gearIcon)))
 					]),
 					content,
 				]),
