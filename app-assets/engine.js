@@ -73,7 +73,7 @@ var engine = engine || {};
 			m.trust(engine.currentImageHtml),
 			m("div.card-body", [
 				m("h5.card-title", engine.currentLocation.title),
-				m("p.card-text", engine.currentLocation.text),
+				m("p.card-text", m.trust(engine.currentLocation.text.replaceAll('<p>', '<p class="card-text">'))),
 			]),
 			m("div.list-group.list-group-flush", engine.currentLocation.ways.map(function(way, index) {
 				return m("button.list-group-item.list-group-item-action.text-primary", { onclick: function() { engine.chooseWay(index) } }, way.text);
