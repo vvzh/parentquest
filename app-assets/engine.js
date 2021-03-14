@@ -86,7 +86,7 @@ var engine = engine || {};
 			m("div.card-body", [
 				m("h5.card-title", "Меню"),
 				m("div.form", [
-					m("div.form-group", m("button.btn.btn-sm.btn-secondary", { onclick: function() { engine.restart(); } }, "Начать заново")),
+					m("div.form-group", m("button.btn.btn-sm.btn-secondary.btn-block.text-left", { onclick: function() { engine.restart(); } }, "Начать заново")),
 				]),
 			]),
 			m("div.card-footer", [
