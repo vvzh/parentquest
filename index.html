@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="app-assets/bootstrap.min.css">
-    <link rel="stylesheet" href="app-assets/app.css">
+    <link rel="stylesheet" href="engine/bootstrap.min.css">
+    <link rel="stylesheet" href="engine/engine.css">
   </head>
   <body class="bg-paper">
     <div class="mt-4 d-none d-md-block"><!--Vertical spacing for medium and large screens--></div>
     <div class="container-fluid" id="game-screen" style="max-width: 50em;"><!--Main game container--></div>
-    <script src="app-assets/mithril.min.js"></script>
-    <script src="app-assets/mithril-storage.min.js"></script>
-    <script src="app-assets/engine.js"></script>
-    <script src="game-assets/game.js"></script>
+    <script src="engine/mithril.min.js"></script>
+    <script src="engine/mithril-storage.min.js"></script>
+    <script src="engine/engine.js"></script>
+    <script src="game/game.js"></script>
     <script>
       engine.open(game);
       m.mount(document.getElementById("game-screen"), engine);
