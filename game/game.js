@@ -6,6 +6,7 @@ var game = game || {};
 
 	game.id = "parentquest";
 	game.name = "Название квеста";
+	game.footer = "Информация о квесте для подвала страницы";
 	game.firstLocationId = 'l1';
 
 	game.locations = {

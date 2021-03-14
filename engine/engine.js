@@ -112,7 +112,7 @@ var engine = engine || {};
 					]),
 					m("div.row.mt-4", [
 						m("div.col.px-0", [
-							m("p.text-center", [m("small.text-muted", "Родительский университет, выпуск 2021")])
+							m("p.text-center", [m("small.text-muted", game.footer)])
 						])
 					]),
 				]),
