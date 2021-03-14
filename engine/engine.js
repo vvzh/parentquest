@@ -97,18 +97,26 @@ var engine = engine || {};
 
 	engine.decorate = function(content) {
 		return m.fragment(
-			m("div.row", [ m("div.col.px-0", [
-				m("div.card.shadow-sm", [
-					m("div.card-header", [
-						engine.game.name,
-						m("div.float-right", m("a.text-secondary", { href: 'javascript:void(0)', title: "Меню", onclick: function() { engine.menuMode = !engine.menuMode } }, m.trust(engine.gearIcon)))
+			m("div.mt-4.d-none.d-md-block", [ // Vertical spacing for medium and large screens
+				m("div.container-fluid", { style: "max-width: 50em;" }, [ // Game container
+					m("div.row", [
+						m("div.col.px-0", [
+							m("div.card.shadow-sm", [
+								m("div.card-header", [
+									engine.game.name,
+									m("div.float-right", m("a.text-secondary", { href: 'javascript:void(0)', title: "Меню", onclick: function() { engine.menuMode = !engine.menuMode } }, m.trust(engine.gearIcon)))
+								]),
+								content,
+							]),
+						])
 					]),
-					content,
+					m("div.row.mt-4", [
+						m("div.col.px-0", [
+							m("p.text-center", [m("small.text-muted", "Родительский университет, выпуск 2021")])
+						])
+					]),
 				]),
-			])]),
-			m("div.row.mt-4", [ m("div.col.px-0", [
-				m("p.text-center", [m("small.text-muted", "Родительский университет, выпуск 2021")])
-			])]),
+			]),
 		);
 	}
 
