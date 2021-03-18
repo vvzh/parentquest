@@ -5,6 +5,12 @@ var engine = engine || {};
 (function () {
 
 	engine.storage = mx.storage();
+	engine.typograf = new Typograf({locale: ['ru', 'en-US']});
+	engine.typograf.disableRule('common/space/beforeBracket');
+	engine.preprocessText = function(text) {
+		return engine.typograf.execute(text);
+	}
+
 	engine.i18n = {
 		'menu': "Меню",
 		'closeMenu': "Закрыть меню",
@@ -82,10 +88,10 @@ var engine = engine || {};
 			m("div.card-body.bg-light-fibers", [
 				m("h5.card-title", engine.currentLocation.title),
 				// using global regexp instead of replaceAll(), because Safari does not support the latter:
-				m("p.card-text", m.trust(engine.currentLocation.text.replace(/<p>/g, '<p class="card-text">'))),
+				m("p.card-text", m.trust(engine.preprocessText(engine.currentLocation.text.replace(/<p>/g, '<p class="card-text">')))),
 			]),
 			m("div.list-group.list-group-flush", engine.currentLocation.ways.map(function(way, index) {
-				return m("button.list-group-item.list-group-item-action.text-primary", { onclick: function() { engine.chooseWay(index) } }, way.text);
+				return m("button.list-group-item.list-group-item-action.text-primary", { onclick: function() { engine.chooseWay(index) } }, engine.preprocessText(way.text));
 			})),
 		);
 	}
