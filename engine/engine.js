@@ -29,6 +29,9 @@ var engine = engine || {};
 		engine.goToLocation(engine.game.firstLocationId, false);
 	}
 
+	// TODO: add Game constructor, init default property values there
+	// TODO: call engine.preprocessText() only once in constructors
+
 	// Way constructor
 	engine.Way = function(jsonObject) {
 		// TODO: Add sanity checks
