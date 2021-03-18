@@ -70,6 +70,7 @@ var engine = engine || {};
 		} else {
 			engine.currentImageHtml = this.imagePlaceholder;
 		}
+		window.scrollTo(0, 0);
 	}
 
 	engine.imagePlaceholder = '<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + engine.i18n['imagePlaceholder'] + '" preserveAspectRatio="xMidYMid slice" focusable="false"><title>' + engine.i18n['imagePlaceholder'] + '</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dx="-4.5em" dy=".3em" font-weight="bold">' + engine.i18n['imagePlaceholder'] + '</text></svg>';
