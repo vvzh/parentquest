@@ -4,6 +4,7 @@ var engine = engine || {};
 
 (function () {
 
+	engine.storage = mx.storage();
 	engine.i18n = {
 		'menu': "Меню",
 		'closeMenu': "Закрыть меню",
@@ -14,9 +15,6 @@ var engine = engine || {};
 	engine.open = function(game) {
 		engine.game = game;
 		document.title = game.name;
-		if (!engine.hasOwnProperty('storage')) {
-			engine.storage = mx.storage();
-		}
 		engine.state = engine.storage.get(engine.game.id);
 		if (engine.state && engine.state.hasOwnProperty('currentLocationId')) {
 			engine.goToLocation(engine.state.currentLocationId, false);
