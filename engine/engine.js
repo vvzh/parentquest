@@ -66,7 +66,7 @@ var engine = engine || {};
 		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
 		engine.currentLocation = engine.Location(engine.game.locations[engine.state.currentLocationId]);
 		if (engine.currentLocation.hasOwnProperty('image')) {
-			engine.currentImageHtml = '<img src="' + engine.game.imagesPrefix + engine.currentLocation.image + '">';
+			engine.currentImageHtml = '<img width="100%" src="' + engine.game.imagesPrefix + engine.currentLocation.image + '">';
 		} else {
 			engine.currentImageHtml = this.imagePlaceholder;
 		}
