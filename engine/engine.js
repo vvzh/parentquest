@@ -19,6 +19,7 @@ var engine = engine || {};
 	}
 
 	engine.open = function(game) {
+		// TODO: preload first location image
 		engine.game = game;
 		document.title = game.name;
 		engine.state = engine.storage.get(engine.game.id);
@@ -61,6 +62,7 @@ var engine = engine || {};
 		if (execEvents) {
 			// TODO: add calling event callbacks here once they are needed
 		}
+		// TODO: preload next location images
 		engine.state.currentLocationId = locationId;
 		engine.storage.set(engine.game.id, engine.state);
 		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
