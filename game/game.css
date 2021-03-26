@@ -1,0 +1,45 @@
+body {
+  font-family: 'Lobster', cursive;
+  font-size: 1.15rem;
+  color: #423222;
+}
+
+h5 {
+  font-size: 1.35rem;
+}
+
+div.card {
+  background-image: url(../engine/img/ricepaper_v3.png);
+}
+
+button.list-group-item {
+  background-image: url(../engine/img/ricepaper_v3.png);
+}
+
+button.text-primary {
+  color: #005099 !important;
+}
+
+.text-secondary {
+  color: #7d746c !important;
+}
+
+a.text-secondary:focus, a.text-secondary:hover {
+  color: #68605a !important;
+}
+
+button.btn-secondary {
+  background-color: #7d746c;
+}
+
+.btn-secondary:hover {
+  background-color: #68605a;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+  background-color: #625a54;
+}
+
+button.list-group-item:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.45);
+}
