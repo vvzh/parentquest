@@ -6,7 +6,7 @@ var game = game || {};
 
 	game.id = "parentquest";
 	game.name = "Творческое послание";
-	game.footer = "Родительский университет, выпуск 2021";
+	game.footer = '<a class="text-secondary" href="https://runiver.wixsite.com/ru2020">Родительский университет</a>, выпуск 2021, группа&nbsp;Валерия&nbsp;и&nbsp;Евгения';
 	game.imagesPrefix = 'game/images/';
 	game.firstLocationId = 'l1';
 
