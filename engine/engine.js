@@ -104,11 +104,11 @@ var engine = engine || {};
 			m("div.card-body", [
 				m("h5.card-title", engine.i18n['menu']),
 				m("div.form", [
-					m("div.form-group", m("button.btn.btn-sm.btn-secondary.btn-block.text-left", { onclick: function() { engine.restart(); } }, engine.i18n['restart'])),
+					m("div.form-group", m("button.btn.btn-secondary.btn-block.text-left", { onclick: function() { engine.restart(); } }, engine.i18n['restart'])),
 				]),
 			]),
 			m("div.card-footer", [
-				m("button.btn.btn-sm.btn-secondary", { onclick: function() { engine.menuMode = false } }, engine.i18n['closeMenu']),
+				m("button.btn.btn-secondary", { onclick: function() { engine.menuMode = false } }, engine.i18n['closeMenu']),
 			]),
 		);
 	}
