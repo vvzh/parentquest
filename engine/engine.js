@@ -88,7 +88,7 @@ var engine = engine || {};
 	engine.renderGameLocation = function() {
 		return m.fragment(
 			m.trust(engine.currentImageHtml),
-			m("div.card-body.bg-light-fibers", [
+			m("div.card-body", [
 				m("h5.card-title", engine.currentLocation.title),
 				// using global regexp instead of replaceAll(), because Safari does not support the latter:
 				m("p.card-text", m.trust(engine.preprocessText(engine.currentLocation.text.replace(/<p>/g, '<p class="card-text">')))),
@@ -101,13 +101,13 @@ var engine = engine || {};
 
 	engine.renderMenu = function() {
 		return m.fragment(
-			m("div.card-body.bg-light-fibers", [
+			m("div.card-body", [
 				m("h5.card-title", engine.i18n['menu']),
 				m("div.form", [
 					m("div.form-group", m("button.btn.btn-sm.btn-secondary.btn-block.text-left", { onclick: function() { engine.restart(); } }, engine.i18n['restart'])),
 				]),
 			]),
-			m("div.card-footer.bg-groovepaper", [
+			m("div.card-footer", [
 				m("button.btn.btn-sm.btn-secondary", { onclick: function() { engine.menuMode = false } }, engine.i18n['closeMenu']),
 			]),
 		);
@@ -120,7 +120,7 @@ var engine = engine || {};
 				m("div.row", [
 					m("div.col.px-0", [
 						m("div.card.shadow-sm", [
-							m("div.card-header.bg-groovepaper", [
+							m("div.card-header", [
 								engine.game.name,
 								m("div.float-right", m("a.text-secondary", { href: 'javascript:void(0)', title: engine.i18n['menu'], onclick: function() { engine.menuMode = !engine.menuMode } }, m.trust(engine.gearIcon)))
 							]),
