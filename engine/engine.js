@@ -130,7 +130,7 @@ var engine = engine || {};
 				]),
 				m("div.row.mt-4", [
 					m("div.col.px-0", [
-						m("p.text-center", [m("small.text-muted", game.footer)])
+						m("p.text-center", [m("small.text-muted", m.trust(game.footer))])
 					])
 				]),
 			]),
