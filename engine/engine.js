@@ -116,7 +116,7 @@ var engine = engine || {};
 	engine.decorate = function(content) {
 		return m.fragment(
 			m("div.mt-4.d-none.d-md-block"), // Vertical spacing for medium and large screens
-			m("div.container-fluid", { style: "max-width: 50em;" }, [ // Game container
+			m("div.container-fluid", { style: "max-width: 30em;" }, [ // Game container
 				m("div.row", [
 					m("div.col.px-0", [
 						m("div.card.shadow-sm", [
