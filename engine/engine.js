@@ -18,15 +18,26 @@ var engine = engine || {};
 		'imagePlaceholder': "Место для картинки",
 	}
 
+	engine.preloadLocationImage = function(locationId) {
+		if (engine.game.locations.hasOwnProperty(locationId)) {
+			var location = engine.game.locations[locationId];
+			if (location.hasOwnProperty("image")) {
+				var preloadedImage = new Image();
+				preloadedImage.src = engine.game.imagesPrefix + location.image;
+			}
+		}
+	}
+
 	engine.open = function(game) {
-		// TODO: preload first location image
 		engine.game = game;
 		document.title = game.name;
 		engine.state = engine.storage.get(engine.game.id);
 		if (engine.state && engine.state.hasOwnProperty('currentLocationId') && engine.state.hasOwnProperty('gameState')) {
 			engine.game.state = engine.state.gameState;
+			engine.preloadLocationImage(engine.state.currentLocationId);
 			engine.goToLocation(engine.state.currentLocationId, false);
 		} else {
+			engine.preloadLocationImage(engine.game.firstLocationId);
 			engine.restart();
 		}
 	}
@@ -75,12 +86,17 @@ var engine = engine || {};
 			}
 			// TODO: add more event callbacks once they are needed
 		}
-		// TODO: preload next location images
 		engine.state.currentLocationId = locationId;
 		engine.storage.set(engine.game.id, engine.state);
 		engine.currentLocation = newLocation;
 		document.activeElement.blur(); // remove focus from active element
 		window.scrollTo(0, 0); // scroll page to the top
+		// preload images for possible next locations:
+		newLocation.ways.forEach(function(way) {
+			if (way.hasOwnProperty('target')) {
+				engine.preloadLocationImage(way.target);
+			}
+		});
 		return true;
 	}
 
