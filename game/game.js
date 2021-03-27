@@ -193,6 +193,15 @@ var game = game || {};
 			'image': "family3.jpg",
 			'text': "Таким образом, совсем юные студенты, иногда не имеющие даже связи с собственными родителями или наоборот слишком тесно связанные с ними настолько, что не могут познать Жизнь самостоятельно имеют прекрасную возможность для обучения азам гуманной педагогики в Родительском Университете. Гуманная Педагогика – это фундамент образовательной системы современного общества и отличное подспорье до создания крепкой и здоровой семьи! Ждём Вас, дорогой абитуриент в нашей полной Света аудитории экзаменационной комиссии...",
 		},
+		'cycle': {
+			'title': "Колесо Сансары",
+			'image': "watermill.jpg",
+			'text': "Наша Жизнь циклична... Это неоспоримый факт, и зачастую повторяющиеся циклы материальной природы превалируют над развитием нашей души. Только реализовав полученные знания на практике, нам удастся вырваться из Колеса Сансары.",
+			'ways': [{
+				'text': "Начать игру заново",
+				'action': function(engine) { engine.restart(); },
+			}],
+		},
 
 		// '': {
 		// 	'title': "",
@@ -205,6 +214,23 @@ var game = game || {};
 		// 		'target': '',
 		// 	}],
 		// },
+	}
+
+	game.init = function(engine) {
+		game.state.visitsPerLocation = {};
+	}
+
+	game.beforeEnter = function(location, engine) {
+		if (!game.state.visitsPerLocation.hasOwnProperty(location.id)) {
+			game.state.visitsPerLocation[location.id] = 1;
+		} else {
+			game.state.visitsPerLocation[location.id] += 1;
+		}
+		if (game.state.visitsPerLocation[location.id] > 3) {
+			engine.goToLocation('cycle', false);
+			return false;
+		}
+		return true;
 	}
 
 })();
