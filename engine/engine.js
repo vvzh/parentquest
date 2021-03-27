@@ -53,9 +53,10 @@ var engine = engine || {};
 	}
 
 	// Location constructor
-	engine.Location = function(jsonObject) {
+	engine.Location = function(jsonObject, locationId) {
 		// TODO: Add sanity checks
 		var location = jsonObject;
+		location.id = locationId;
 		// Init default location properties:
 		if (!location.hasOwnProperty('ways')) {
 			location.ways = [];
@@ -64,16 +65,23 @@ var engine = engine || {};
 	}
 
 	engine.goToLocation = function(locationId, execEvents = true) {
+		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
+		var newLocation = engine.Location(engine.game.locations[locationId], locationId);
 		if (execEvents) {
-			// TODO: add calling event callbacks here once they are needed
+			if (engine.game.hasOwnProperty("beforeEnter")) {
+				if (engine.game.beforeEnter.call(engine.game, newLocation, engine) === false) {
+					return false;
+				}
+			}
+			// TODO: add more event callbacks once they are needed
 		}
 		// TODO: preload next location images
 		engine.state.currentLocationId = locationId;
 		engine.storage.set(engine.game.id, engine.state);
-		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
-		engine.currentLocation = engine.Location(engine.game.locations[engine.state.currentLocationId]);
+		engine.currentLocation = newLocation;
 		document.activeElement.blur(); // remove focus from active element
 		window.scrollTo(0, 0); // scroll page to the top
+		return true;
 	}
 
 	engine.getCurrentImageCode = function() {
