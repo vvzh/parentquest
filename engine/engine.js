@@ -23,7 +23,8 @@ var engine = engine || {};
 		engine.game = game;
 		document.title = game.name;
 		engine.state = engine.storage.get(engine.game.id);
-		if (engine.state && engine.state.hasOwnProperty('currentLocationId')) {
+		if (engine.state && engine.state.hasOwnProperty('currentLocationId') && engine.state.hasOwnProperty('gameState')) {
+			engine.game.state = engine.state.gameState;
 			engine.goToLocation(engine.state.currentLocationId, false);
 		} else {
 			engine.restart();
@@ -32,7 +33,11 @@ var engine = engine || {};
 
 	engine.restart = function() {
 		engine.menuMode = false;
-		engine.state = {};
+		engine.state = {'gameState': {}};
+		engine.game.state = engine.state.gameState;
+		if (engine.game.hasOwnProperty('init')) {
+			engine.game.init.call(engine.game, engine);
+		}
 		engine.goToLocation(engine.game.firstLocationId, false);
 	}
 
