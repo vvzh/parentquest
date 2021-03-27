@@ -67,16 +67,18 @@ var engine = engine || {};
 		engine.storage.set(engine.game.id, engine.state);
 		// TODO: transform locations and ways into proper objects on load, not in goToLocation?
 		engine.currentLocation = engine.Location(engine.game.locations[engine.state.currentLocationId]);
-		if (engine.currentLocation.hasOwnProperty('image')) {
-			engine.currentImageHtml = '<img width="100%" src="' + engine.game.imagesPrefix + engine.currentLocation.image + '">';
-		} else {
-			engine.currentImageHtml = this.imagePlaceholder;
-		}
 		document.activeElement.blur(); // remove focus from active element
 		window.scrollTo(0, 0); // scroll page to the top
 	}
 
-	engine.imagePlaceholder = '<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + engine.i18n['imagePlaceholder'] + '" preserveAspectRatio="xMidYMid slice" focusable="false"><title>' + engine.i18n['imagePlaceholder'] + '</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dx="-4.5em" dy=".3em" font-weight="bold">' + engine.i18n['imagePlaceholder'] + '</text></svg>';
+	engine.getCurrentImageCode = function() {
+		if (engine.currentLocation.hasOwnProperty('image')) {
+			return '<img width="100%" src="' + engine.game.imagesPrefix + engine.currentLocation.image + '">';
+		} else {
+			// Return image placeholder
+			return '<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + engine.i18n['imagePlaceholder'] + '" preserveAspectRatio="xMidYMid slice" focusable="false"><title>' + engine.i18n['imagePlaceholder'] + '</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dx="-4.5em" dy=".3em" font-weight="bold">' + engine.i18n['imagePlaceholder'] + '</text></svg>';
+		}
+	}
 
 	// Part of Bootstrap Icons package: https://icons.getbootstrap.com/icons/gear-fill/
 	// Licensed under MIT License
@@ -94,7 +96,7 @@ var engine = engine || {};
 
 	engine.renderGameLocation = function() {
 		return m.fragment(
-			m.trust(engine.currentImageHtml),
+			m.trust(engine.getCurrentImageCode()),
 			m("div.card-body", [
 				m("h5.card-title", engine.currentLocation.title),
 				// using global regexp instead of replaceAll(), because Safari does not support the latter:
