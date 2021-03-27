@@ -8,6 +8,10 @@ h5 {
   font-size: 1.35rem;
 }
 
+h5.card-title {
+  display: none; /* Hide location titles */
+}
+
 div.card {
   background-image: url(../engine/img/ricepaper_v3.png);
 }
